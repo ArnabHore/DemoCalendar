@@ -32,17 +32,12 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
             guard let day = day else { return }
             
             numberLabel.text = day.number
-            accessibilityLabel = accessibilityDateFormatter.string(from: day.date)
             updateSelectionStatus()
         }
     }
     
     override init(frame: CGRect) {
       super.init(frame: frame)
-
-      isAccessibilityElement = true
-      accessibilityTraits = .button
-
       contentView.addSubview(selectionBackgroundView)
       contentView.addSubview(numberLabel)
     }
@@ -68,8 +63,8 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
     }
 }
 
-private extension CalendarDateCollectionViewCell {
-  // 1
+private extension CalendarCollectionViewCell {
+  // Apply a different style to the cell based on the selection status of the day.
   func updateSelectionStatus() {
     guard let day = day else { return }
 
@@ -80,29 +75,13 @@ private extension CalendarDateCollectionViewCell {
     }
   }
 
-  // 2
-  var isSmallScreenSize: Bool {
-    let isCompact = traitCollection.horizontalSizeClass == .compact
-    let smallWidth = UIScreen.main.bounds.width <= 350
-    let widthGreaterThanHeight = UIScreen.main.bounds.width > UIScreen.main.bounds.height
-
-    return isCompact && (smallWidth || widthGreaterThanHeight)
-  }
-
-  // 3
+  // Apply when the user selects the cell
   func applySelectedStyle() {
-    accessibilityTraits.insert(.selected)
-    accessibilityHint = nil
-
-    numberLabel.textColor = isSmallScreenSize ? .systemRed : .white
-    selectionBackgroundView.isHidden = isSmallScreenSize
+    numberLabel.textColor = .systemRed
   }
 
-  // 4
+  // Apply a default style to the cell.
   func applyDefaultStyle(isWithinDisplayedMonth: Bool) {
-    accessibilityTraits.remove(.selected)
-    accessibilityHint = "Tap to select"
-
     numberLabel.textColor = isWithinDisplayedMonth ? .label : .secondaryLabel
     selectionBackgroundView.isHidden = true
   }
