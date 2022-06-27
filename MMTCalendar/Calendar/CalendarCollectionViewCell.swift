@@ -14,7 +14,7 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
-        view.backgroundColor = .systemTeal
+        view.backgroundColor = .systemBlue
         return view
     }()
     
@@ -77,7 +77,7 @@ private extension CalendarCollectionViewCell {
 
   // Apply when the user selects the cell
   func applySelectedStyle() {
-    numberLabel.textColor = .systemRed
+    numberLabel.textColor = .white
   }
 
   // Apply a default style to the cell.
