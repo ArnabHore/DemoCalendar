@@ -19,11 +19,13 @@ class MMTCalendarView: UIView {
         
         return collectionView
     }()
+    private let headerView = CalendarHeaderView()
     
     private var currentDate: Date {
         didSet {
             days = self.generateDaysInMonth(currentDate: currentDate)
             collectionView.reloadData()
+            headerView.currentData = currentDate
         }
     }
     
@@ -59,20 +61,29 @@ class MMTCalendarView: UIView {
         self.setup()
     }
     
-    func setup() {
+    private func setup() {
         //self.selectedDateChanged = selectedDateChanged
         
         self.addSubview(collectionView)
+        self.addSubview(headerView)
         
-        self.addConstraint(NSLayoutConstraint(item: collectionView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: collectionView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: collectionView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: collectionView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
+        collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: self.headerView.bottomAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+        headerView.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor).isActive = true
+        headerView.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor).isActive = true
+        headerView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        headerView.heightAnchor.constraint(equalToConstant: 85).isActive = true
         
         collectionView.register(CalendarCollectionViewCell.self, forCellWithReuseIdentifier: CalendarCollectionViewCell.reuseIdentifier)
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        headerView.currentData = currentDate
+        headerView.calendarButtonDelegate = self
     }
 }
 
@@ -99,6 +110,24 @@ extension MMTCalendarView: UICollectionViewDelegateFlowLayout {
         let width = Int(collectionView.frame.width / 7)
         let height = Int(collectionView.frame.height) / numberOfWeeksInCurrentDate
         return CGSize(width: width, height: height)
+    }
+}
+
+extension MMTCalendarView: CalendarButtonDelegate {
+    func didTapPreviousMonth() {
+        self.currentDate = self.calendar.date(
+            byAdding: .month,
+            value: -1,
+            to: self.currentDate
+        ) ?? self.currentDate
+    }
+    
+    func didTapNextMonth() {
+        self.currentDate = self.calendar.date(
+            byAdding: .month,
+            value: 1,
+            to: self.currentDate
+        ) ?? self.currentDate
     }
 }
 

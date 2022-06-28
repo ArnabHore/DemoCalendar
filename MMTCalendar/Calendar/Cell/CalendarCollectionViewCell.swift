@@ -37,13 +37,13 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
     }
     
     override init(frame: CGRect) {
-      super.init(frame: frame)
-      contentView.addSubview(selectionBackgroundView)
-      contentView.addSubview(numberLabel)
+        super.init(frame: frame)
+        contentView.addSubview(selectionBackgroundView)
+        contentView.addSubview(numberLabel)
     }
-
+    
     required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {
@@ -64,25 +64,26 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
 }
 
 private extension CalendarCollectionViewCell {
-  // Apply a different style to the cell based on the selection status of the day.
-  func updateSelectionStatus() {
-    guard let day = day else { return }
-
-    if day.isSelected {
-      applySelectedStyle()
-    } else {
-      applyDefaultStyle(isWithinDisplayedMonth: day.isWithinDisplayedMonth)
+    // Apply a different style to the cell based on the selection status of the day.
+    func updateSelectionStatus() {
+        guard let day = day else { return }
+        
+        if day.isSelected {
+            applySelectedStyle()
+        } else {
+            applyDefaultStyle(isWithinDisplayedMonth: day.isWithinDisplayedMonth)
+        }
     }
-  }
-
-  // Apply when the user selects the cell
-  func applySelectedStyle() {
-    numberLabel.textColor = .white
-  }
-
-  // Apply a default style to the cell.
-  func applyDefaultStyle(isWithinDisplayedMonth: Bool) {
-    numberLabel.textColor = isWithinDisplayedMonth ? .label : .secondaryLabel
-    selectionBackgroundView.isHidden = true
-  }
+    
+    // Apply when the user selects the cell
+    func applySelectedStyle() {
+        numberLabel.textColor = .white
+        selectionBackgroundView.isHidden = false
+    }
+    
+    // Apply a default style to the cell.
+    func applyDefaultStyle(isWithinDisplayedMonth: Bool) {
+        numberLabel.textColor = isWithinDisplayedMonth ? .label : .secondaryLabel
+        selectionBackgroundView.isHidden = true
+    }
 }
