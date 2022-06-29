@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol MMTCalendarDelegate: AnyObject {
+    func didSelectDate(startDate: Date, endDate: Date?)
+    func showError(message: String)
+}
+
 class MMTCalendarView: UIView {
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -40,7 +45,15 @@ class MMTCalendarView: UIView {
     let today: Date
     
     // To store selected days, useful when selected dates are not in current months
-    var selectedDays: [Day] = []
+    var selectedDays: [Day] = [] {
+        didSet {
+            if selectedDays.count == 2 {
+                delegate?.didSelectDate(startDate: selectedDays[0].date, endDate: selectedDays[1].date)
+            } else if selectedDays.count == 1 {
+                delegate?.didSelectDate(startDate: selectedDays[0].date, endDate: nil)
+            }
+        }
+    }
         
     var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -49,6 +62,8 @@ class MMTCalendarView: UIView {
     }()
     
     var priceList: [Price] = []
+    
+    weak var delegate: MMTCalendarDelegate?
     
     override init(frame: CGRect) {
         self.today = Date()

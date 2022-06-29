@@ -18,24 +18,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PSR-BU-xB4" customClass="MMTCalendarView" customModule="MMTCalendar" customModuleProvider="target">
-                                <rect key="frame" x="20" y="261" width="374" height="374"/>
+                                <rect key="frame" x="20" y="168" width="374" height="374"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PSR-BU-xB4" secondAttribute="height" multiplier="1:1" id="xVp-nR-4eh"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select start and end date" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1w-qQ-Vta">
+                                <rect key="frame" x="20" y="592" width="374" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="D1w-qQ-Vta" secondAttribute="trailing" constant="20" id="662-nI-FO1"/>
                             <constraint firstItem="PSR-BU-xB4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="CdD-ly-M2a"/>
-                            <constraint firstItem="PSR-BU-xB4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="oX3-vp-cN0"/>
+                            <constraint firstItem="D1w-qQ-Vta" firstAttribute="top" secondItem="PSR-BU-xB4" secondAttribute="bottom" constant="50" id="OA3-DH-p9n"/>
+                            <constraint firstItem="PSR-BU-xB4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="eGA-fi-cb9"/>
+                            <constraint firstItem="D1w-qQ-Vta" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="nYI-Ql-7P5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PSR-BU-xB4" secondAttribute="trailing" constant="20" id="p47-L3-d60"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5ca-uX-QTU"/>
                     <connections>
                         <outlet property="calendarView" destination="PSR-BU-xB4" id="QGL-hz-oBH"/>
+                        <outlet property="infoLabel" destination="D1w-qQ-Vta" id="44m-y0-vex"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

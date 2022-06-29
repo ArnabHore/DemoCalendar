@@ -24,7 +24,11 @@ extension MMTCalendarView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let day = days[indexPath.row]
         let order = calendar.compare(day.date, to: today, toGranularity: .day)
-        guard order == .orderedSame || order == .orderedDescending else { return }
+        guard order == .orderedSame || order == .orderedDescending
+        else {
+            delegate?.showError(message: "You can't select past date!")
+            return
+        }
 
         if self.selectedDays.count < 2 {
             // For round trip we can select at most 2 days.
