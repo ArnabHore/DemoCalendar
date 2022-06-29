@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "MMT Calendar"
         calendarView.delegate = self
     }
 }
@@ -21,9 +22,13 @@ extension HomeViewController: MMTCalendarDelegate {
     func didSelectDate(startDate: Date, endDate: Date?) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM yyyy"
+        
         var endDateString = ""
         if let endDate = endDate {
-            endDateString = " - " + dateFormatter.string(from: endDate)
+            let order = Calendar.current.compare(startDate, to: endDate, toGranularity: .day)
+            if order != .orderedSame {
+                endDateString = " - " + dateFormatter.string(from: endDate)
+            }
         }
         self.infoLabel.text = dateFormatter.string(from: startDate) + endDateString
         self.infoLabel.textColor = .label

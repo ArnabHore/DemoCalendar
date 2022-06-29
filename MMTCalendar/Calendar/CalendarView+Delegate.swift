@@ -36,6 +36,7 @@ extension MMTCalendarView: UICollectionViewDelegateFlowLayout {
             self.selectedDays = selectedDays.sorted(by: { $0.date < $1.date })
             
             if selectedDays.count == 2 {
+                // After append if both the days are selected then create range
                 let startIndex = days.firstIndex(of: selectedDays[0]) ?? 0
                 let endIndex = days.firstIndex(of: selectedDays[1]) ?? (days.count - 1)
                 
@@ -45,20 +46,17 @@ extension MMTCalendarView: UICollectionViewDelegateFlowLayout {
                 }
             }
         } else {
-            // When 2 dates selected, and then user selects another one, then reset previous selection.
             if selectedDays.count == 2 {
+                // When 2 dates are selected, and then user selects another one, then reset previous selection.
                 let startIndex = days.firstIndex(of: selectedDays[0]) ?? 0
                 let endIndex = days.firstIndex(of: selectedDays[1]) ?? (days.count - 1)
 
+                // Remove range from calendar
                 for index in (startIndex ... endIndex) {
                     let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? CalendarCollectionViewCell
                     cell?.isSelectedDay = false
                     cell?.isInSelectionRange = false
                 }
-            } else if selectedDays.count == 1 {
-                let item = days.firstIndex(of: selectedDays[0]) ?? 0
-                let cell = collectionView.cellForItem(at: IndexPath(item: item, section: 0)) as? CalendarCollectionViewCell
-                cell?.isSelectedDay = false
             }
             self.selectedDays = [day]
         }

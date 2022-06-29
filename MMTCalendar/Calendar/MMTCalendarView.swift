@@ -28,6 +28,7 @@ class MMTCalendarView: UIView {
     
     var currentDate: Date {
         didSet {
+            // Generating days of current month and reloading collection view with that data
             let helper = CalendarViewHelper(calendar: calendar, priceList: priceList, today: today, selectedDays: selectedDays, dateFormatter: dateFormatter)
             days = helper.generateDaysInMonth(currentDate: currentDate)
             collectionView.reloadData()
@@ -111,6 +112,7 @@ class MMTCalendarView: UIView {
         headerView.calendarButtonDelegate = self
     }
     
+    // Parsing from a json file containg price list
     func getPriceList() {
         guard let url = Bundle.main.url(forResource: "Price", withExtension: "json"),
               let data = try? Data(contentsOf: url),

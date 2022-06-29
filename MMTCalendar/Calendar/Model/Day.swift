@@ -14,4 +14,8 @@ struct Day: Equatable {
     var isSelected: Bool
     var isInSelectionRange: Bool
     let isWithinDisplayedMonth: Bool
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.date == rhs.date
+    }
 }
