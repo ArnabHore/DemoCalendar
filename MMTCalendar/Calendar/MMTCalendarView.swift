@@ -23,13 +23,14 @@ class MMTCalendarView: UIView {
     
     var currentDate: Date {
         didSet {
-            days = self.generateDaysInMonth(currentDate: currentDate)
+            let helper = CalendarViewHelper(calendar: calendar, today: today, selectedDays: selectedDays, dateFormatter: dateFormatter)
+            days = helper.generateDaysInMonth(currentDate: currentDate)
             collectionView.reloadData()
             headerView.currentData = currentDate
         }
     }
     
-    lazy var days = generateDaysInMonth(currentDate: currentDate)
+    var days: [Day] = []
     
     var numberOfWeeksInCurrentDate: Int {
         calendar.range(of: .weekOfMonth, in: .month, for: currentDate)?.count ?? 0
@@ -44,7 +45,7 @@ class MMTCalendarView: UIView {
     // To store selected IndexPaths, useful for deselect previously selected date automatically
     var selectedIndexes: [IndexPath] = []
     
-    lazy var dateFormatter: DateFormatter = {
+    var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "d"
         return dateFormatter
@@ -67,6 +68,10 @@ class MMTCalendarView: UIView {
     }
     
     private func setup() {
+        let helper = CalendarViewHelper(calendar: calendar, today: today, selectedDays: selectedDays, dateFormatter: dateFormatter)
+        self.days = helper.generateDaysInMonth(currentDate: currentDate)
+        self.parseJson()
+        
         self.layer.borderColor = UIColor.systemGray3.cgColor
         self.layer.borderWidth = 0.5
         
@@ -90,5 +95,13 @@ class MMTCalendarView: UIView {
         
         headerView.currentData = currentDate
         headerView.calendarButtonDelegate = self
+    }
+    
+    func parseJson() {
+        guard let url = Bundle.main.url(forResource: "Price", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let response = try? JSONDecoder().decode(PriceList.self, from: data)
+        else { return }
+        print(response)
     }
 }

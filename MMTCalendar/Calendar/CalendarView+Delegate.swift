@@ -65,6 +65,7 @@ extension MMTCalendarView: UICollectionViewDelegateFlowLayout {
 
 extension MMTCalendarView: CalendarButtonDelegate {
     func didTapPreviousMonth() {
+        self.selectedIndexes = []
         self.currentDate = self.calendar.date(
             byAdding: .month,
             value: -1,
@@ -73,6 +74,7 @@ extension MMTCalendarView: CalendarButtonDelegate {
     }
     
     func didTapNextMonth() {
+        self.selectedIndexes = []
         self.currentDate = self.calendar.date(
             byAdding: .month,
             value: 1,

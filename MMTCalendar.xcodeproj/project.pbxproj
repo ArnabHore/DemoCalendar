@@ -11,6 +11,7 @@
 		07B77AE7286B5F4800A1A2BA /* CalendarView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B77AE6286B5F4800A1A2BA /* CalendarView+Delegate.swift */; };
 		07B77AE9286B60E600A1A2BA /* CalendarViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B77AE8286B60E600A1A2BA /* CalendarViewHelper.swift */; };
 		07B77AEB286C1D1D00A1A2BA /* Price.json in Resources */ = {isa = PBXBuildFile; fileRef = 07B77AEA286C1D1D00A1A2BA /* Price.json */; };
+		07B77AF0286C8E1000A1A2BA /* PriceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B77AEF286C8E1000A1A2BA /* PriceList.swift */; };
 		07EBB30B286A0029006384DC /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EBB30A286A0029006384DC /* CalendarCollectionViewCell.swift */; };
 		07EBB310286A0339006384DC /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EBB30F286A0339006384DC /* Month.swift */; };
 		07EBB312286A033F006384DC /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EBB311286A033F006384DC /* Day.swift */; };
@@ -48,6 +49,7 @@
 		07B77AE6286B5F4800A1A2BA /* CalendarView+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView+Delegate.swift"; sourceTree = "<group>"; };
 		07B77AE8286B60E600A1A2BA /* CalendarViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewHelper.swift; sourceTree = "<group>"; };
 		07B77AEA286C1D1D00A1A2BA /* Price.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Price.json; sourceTree = "<group>"; };
+		07B77AEF286C8E1000A1A2BA /* PriceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceList.swift; sourceTree = "<group>"; };
 		07EBB30A286A0029006384DC /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		07EBB30F286A0339006384DC /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		07EBB311286A033F006384DC /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
@@ -108,6 +110,33 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		07B77AEC286C7FB800A1A2BA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				07B77AEA286C1D1D00A1A2BA /* Price.json */,
+				07FB75D92869D9D200E3F842 /* Assets.xcassets */,
+				07FB75DB2869D9D200E3F842 /* LaunchScreen.storyboard */,
+				07FB75DE2869D9D200E3F842 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		07B77AED286C7FD900A1A2BA /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				07FB75D62869D9D100E3F842 /* Main.storyboard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		07B77AEE286C8DE600A1A2BA /* FareModel */ = {
+			isa = PBXGroup;
+			children = (
+				07B77AEF286C8E1000A1A2BA /* PriceList.swift */,
+			);
+			path = FareModel;
+			sourceTree = "<group>";
+		};
 		07EBB3092869FEB4006384DC /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,9 +153,9 @@
 		07EBB30E286A032D006384DC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				07B77AEE286C8DE600A1A2BA /* FareModel */,
 				07EBB30F286A0339006384DC /* Month.swift */,
 				07EBB311286A033F006384DC /* Day.swift */,
-				07B77AEA286C1D1D00A1A2BA /* Price.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -156,11 +185,9 @@
 			children = (
 				07FB76002869FC8000E3F842 /* AppDelegate */,
 				07FB76032869FCD700E3F842 /* ViewControllers */,
+				07B77AED286C7FD900A1A2BA /* UI */,
 				07EBB3092869FEB4006384DC /* Calendar */,
-				07FB75D62869D9D100E3F842 /* Main.storyboard */,
-				07FB75D92869D9D200E3F842 /* Assets.xcassets */,
-				07FB75DB2869D9D200E3F842 /* LaunchScreen.storyboard */,
-				07FB75DE2869D9D200E3F842 /* Info.plist */,
+				07B77AEC286C7FB800A1A2BA /* Resources */,
 			);
 			path = MMTCalendar;
 			sourceTree = "<group>";
@@ -334,6 +361,7 @@
 				07EBB312286A033F006384DC /* Day.swift in Sources */,
 				07EBB30B286A0029006384DC /* CalendarCollectionViewCell.swift in Sources */,
 				07EBB310286A0339006384DC /* Month.swift in Sources */,
+				07B77AF0286C8E1000A1A2BA /* PriceList.swift in Sources */,
 				07FB75D12869D9D100E3F842 /* AppDelegate.swift in Sources */,
 				07FB75D32869D9D100E3F842 /* SceneDelegate.swift in Sources */,
 				07B77AE7286B5F4800A1A2BA /* CalendarView+Delegate.swift in Sources */,
@@ -519,7 +547,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q9QD5LY5L7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MMTCalendar/Info.plist;
+				INFOPLIST_FILE = MMTCalendar/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -549,7 +577,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Q9QD5LY5L7;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MMTCalendar/Info.plist;
+				INFOPLIST_FILE = MMTCalendar/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

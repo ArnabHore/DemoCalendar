@@ -6,7 +6,19 @@
 //
 
 import Foundation
-extension MMTCalendarView {
+class CalendarViewHelper {
+    let calendar: Calendar
+    let today: Date
+    let selectedDays: [Date]
+    let dateFormatter: DateFormatter
+    
+    init(calendar: Calendar, today: Date, selectedDays: [Date], dateFormatter: DateFormatter) {
+        self.calendar = calendar
+        self.today = today
+        self.selectedDays = selectedDays
+        self.dateFormatter = dateFormatter
+    }
+
     func createMonthData(currentDate: Date) -> Month? {
         // Ask the calendar for the number of days in currentDate's month, then get the first day of that month.
         guard let numberOfDaysInMonth = calendar.range(
