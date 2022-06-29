@@ -23,5 +23,3 @@ Once the app is running, user will be able to see the calendar and select 2 date
 ## Developer
 
 Arnab Hore
-
-
