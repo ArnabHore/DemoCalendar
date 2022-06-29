@@ -70,21 +70,22 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        let size: CGFloat = 45
-        
+                
+        self.layer.borderColor = UIColor.systemGray4.cgColor
+        self.layer.borderWidth = 0.5
+
         numberLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         numberLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        
-        todayBackgroundView.centerYAnchor.constraint(equalTo: numberLabel.centerYAnchor).isActive = true
-        todayBackgroundView.centerXAnchor.constraint(equalTo: numberLabel.centerXAnchor).isActive = true
-        todayBackgroundView.widthAnchor.constraint(equalToConstant: size).isActive = true
-        todayBackgroundView.heightAnchor.constraint(equalToConstant: size).isActive = true
-        
-        selectionBackgroundView.centerYAnchor.constraint(equalTo: numberLabel.centerYAnchor).isActive = true
-        selectionBackgroundView.centerXAnchor.constraint(equalTo: numberLabel.centerXAnchor).isActive = true
-        selectionBackgroundView.widthAnchor.constraint(equalToConstant: size).isActive = true
-        selectionBackgroundView.heightAnchor.constraint(equalToConstant: size).isActive = true
+                
+        todayBackgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        todayBackgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        todayBackgroundView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        todayBackgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+
+        selectionBackgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        selectionBackgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        selectionBackgroundView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        selectionBackgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
 }
 

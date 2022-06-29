@@ -67,6 +67,9 @@ class MMTCalendarView: UIView {
     }
     
     private func setup() {
+        self.layer.borderColor = UIColor.systemGray3.cgColor
+        self.layer.borderWidth = 0.5
+        
         self.addSubview(collectionView)
         self.addSubview(headerView)
         
