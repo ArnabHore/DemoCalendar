@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07282598286CE2670042EA34 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 07282597286CE2670042EA34 /* readme.md */; };
 		07B77AE5286B44F300A1A2BA /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B77AE4286B44F300A1A2BA /* CalendarHeaderView.swift */; };
 		07B77AE7286B5F4800A1A2BA /* CalendarView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B77AE6286B5F4800A1A2BA /* CalendarView+Delegate.swift */; };
 		07B77AE9286B60E600A1A2BA /* CalendarViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B77AE8286B60E600A1A2BA /* CalendarViewHelper.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07282597286CE2670042EA34 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		07B77AE4286B44F300A1A2BA /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
 		07B77AE6286B5F4800A1A2BA /* CalendarView+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView+Delegate.swift"; sourceTree = "<group>"; };
 		07B77AE8286B60E600A1A2BA /* CalendarViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewHelper.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		07FB75C42869D9D100E3F842 = {
 			isa = PBXGroup;
 			children = (
+				07282597286CE2670042EA34 /* readme.md */,
 				07FB75CF2869D9D100E3F842 /* MMTCalendar */,
 				07FB75E62869D9D200E3F842 /* MMTCalendarTests */,
 				07FB75F02869D9D200E3F842 /* MMTCalendarUITests */,
@@ -333,6 +336,7 @@
 				07FB75DD2869D9D200E3F842 /* LaunchScreen.storyboard in Resources */,
 				07B77AEB286C1D1D00A1A2BA /* Price.json in Resources */,
 				07FB75DA2869D9D200E3F842 /* Assets.xcassets in Resources */,
+				07282598286CE2670042EA34 /* readme.md in Resources */,
 				07FB75D82869D9D100E3F842 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
