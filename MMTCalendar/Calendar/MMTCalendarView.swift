@@ -23,10 +23,10 @@ class MMTCalendarView: UIView {
     
     var currentDate: Date {
         didSet {
-            let helper = CalendarViewHelper(calendar: calendar, today: today, selectedDays: selectedDays, dateFormatter: dateFormatter)
+            let helper = CalendarViewHelper(calendar: calendar, priceList: priceList, today: today, selectedDays: selectedDays, dateFormatter: dateFormatter)
             days = helper.generateDaysInMonth(currentDate: currentDate)
             collectionView.reloadData()
-            headerView.currentData = currentDate
+            headerView.currentDate = currentDate
         }
     }
     
@@ -51,6 +51,8 @@ class MMTCalendarView: UIView {
         return dateFormatter
     }()
     
+    var priceList: [Price] = []
+    
     override init(frame: CGRect) {
         self.today = Date()
         self.currentDate = Date()
@@ -68,9 +70,9 @@ class MMTCalendarView: UIView {
     }
     
     private func setup() {
-        let helper = CalendarViewHelper(calendar: calendar, today: today, selectedDays: selectedDays, dateFormatter: dateFormatter)
+        self.getPriceList()
+        let helper = CalendarViewHelper(calendar: calendar, priceList: priceList, today: today, selectedDays: selectedDays, dateFormatter: dateFormatter)
         self.days = helper.generateDaysInMonth(currentDate: currentDate)
-        self.parseJson()
         
         self.layer.borderColor = UIColor.systemGray3.cgColor
         self.layer.borderWidth = 0.5
@@ -93,15 +95,15 @@ class MMTCalendarView: UIView {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        headerView.currentData = currentDate
+        headerView.currentDate = currentDate
         headerView.calendarButtonDelegate = self
     }
     
-    func parseJson() {
+    func getPriceList() {
         guard let url = Bundle.main.url(forResource: "Price", withExtension: "json"),
               let data = try? Data(contentsOf: url),
               let response = try? JSONDecoder().decode(PriceList.self, from: data)
         else { return }
-        print(response)
+        self.priceList = response.data ?? []
     }
 }

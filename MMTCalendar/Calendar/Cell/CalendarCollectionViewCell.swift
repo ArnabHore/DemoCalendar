@@ -35,10 +35,20 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var priceLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .secondaryLabel
+        return label
+    }()
+    
     var day: Day? {
         didSet {
             guard let day = day else { return }
             numberLabel.text = day.number
+            priceLabel.text = day.price
             updateCellStatus()
         }
     }
@@ -62,6 +72,7 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(todayBackgroundView)
         contentView.addSubview(selectionBackgroundView)
         contentView.addSubview(numberLabel)
+        contentView.addSubview(priceLabel)
     }
     
     required init?(coder: NSCoder) {
@@ -74,9 +85,13 @@ final class CalendarCollectionViewCell: UICollectionViewCell {
         self.layer.borderColor = UIColor.systemGray4.cgColor
         self.layer.borderWidth = 0.5
 
-        numberLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        numberLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -10).isActive = true
         numberLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
                 
+        priceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
+        priceLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        priceLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+
         todayBackgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         todayBackgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         todayBackgroundView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -108,6 +123,7 @@ private extension CalendarCollectionViewCell {
     // Apply when it is today
     func applyTodayStyle() {
         numberLabel.textColor = .white
+        priceLabel.textColor = .white
         todayBackgroundView.isHidden = false
         selectionBackgroundView.isHidden = true
     }
@@ -115,6 +131,7 @@ private extension CalendarCollectionViewCell {
     // Apply when the user selects the cell
     func applySelectionStyle() {
         numberLabel.textColor = .white
+        priceLabel.textColor = .white
         selectionBackgroundView.backgroundColor = .systemBlue
         todayBackgroundView.isHidden = true
         selectionBackgroundView.isHidden = false
@@ -123,6 +140,7 @@ private extension CalendarCollectionViewCell {
     // Apply when the cell is inside 2 selected dates
     func applySelectionRangeStyle() {
         numberLabel.textColor = .white
+        priceLabel.textColor = .white
         selectionBackgroundView.backgroundColor = .systemBlue.withAlphaComponent(0.5)
         todayBackgroundView.isHidden = true
         selectionBackgroundView.isHidden = false
@@ -131,6 +149,7 @@ private extension CalendarCollectionViewCell {
     // Apply a default style to the cell.
     func applyDefaultStyle(isWithinDisplayedMonth: Bool) {
         numberLabel.textColor = isWithinDisplayedMonth ? .label : .secondaryLabel
+        priceLabel.textColor = .secondaryLabel
         todayBackgroundView.isHidden = true
         selectionBackgroundView.isHidden = true
     }

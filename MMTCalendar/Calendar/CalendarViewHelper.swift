@@ -8,12 +8,14 @@
 import Foundation
 class CalendarViewHelper {
     let calendar: Calendar
+    let priceList: [Price]
     let today: Date
     let selectedDays: [Date]
     let dateFormatter: DateFormatter
     
-    init(calendar: Calendar, today: Date, selectedDays: [Date], dateFormatter: DateFormatter) {
+    init(calendar: Calendar, priceList: [Price], today: Date, selectedDays: [Date], dateFormatter: DateFormatter) {
         self.calendar = calendar
+        self.priceList = priceList
         self.today = today
         self.selectedDays = selectedDays
         self.dateFormatter = dateFormatter
@@ -85,9 +87,19 @@ class CalendarViewHelper {
             let sortedDate = selectedDays.sorted()
             isInSelectionRange = (sortedDate[0] ... sortedDate[1]).contains(date)
         }
+        
+        var todayPrice = ""
+        let order = calendar.compare(date, to: today, toGranularity: .day)
+        if order == .orderedSame || order == .orderedDescending {
+            let fullDateFormatter = DateFormatter()
+            fullDateFormatter.dateFormat = "yyyy-MM-dd"
+            todayPrice = priceList.filter({ $0.date == fullDateFormatter.string(from: date) }).first?.price ?? ""
+        }
+        
         return Day(
             date: date,
             number: dateFormatter.string(from: date),
+            price: todayPrice,
             isToday: calendar.isDate(date, inSameDayAs: today),
             isSelected: isSelected,
             isInSelectionRange: isInSelectionRange,

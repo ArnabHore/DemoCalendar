@@ -16,6 +16,9 @@ extension MMTCalendarView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionViewCell.reuseIdentifier, for: indexPath) as? CalendarCollectionViewCell else { return UICollectionViewCell() }
         let day = days[indexPath.row]
         cell.day = day
+        if day.isSelected {
+            self.selectedIndexes.append(indexPath)
+        }
         return cell
     }
 }
@@ -23,6 +26,9 @@ extension MMTCalendarView: UICollectionViewDataSource {
 extension MMTCalendarView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let day = days[indexPath.row]
+        let order = calendar.compare(day.date, to: today, toGranularity: .day)
+        guard order == .orderedSame || order == .orderedDescending else { return }
+
         if self.selectedDays.count < 2 {
             // For round trip we can select at most 2 days.
             self.selectedDays.append(day.date)
@@ -36,7 +42,7 @@ extension MMTCalendarView: UICollectionViewDelegateFlowLayout {
                 }
             }
         } else {
-            // When 2 dates selected, and then user selects another one, then reset the selection.
+            // When 2 dates selected, and then user selects another one, then reset previous selection.
             if selectedIndexes.count == 2 {
                 let sortedIndexes = selectedIndexes.sorted()
                 for index in (sortedIndexes[0].row ... sortedIndexes[1].row) {
@@ -65,7 +71,7 @@ extension MMTCalendarView: UICollectionViewDelegateFlowLayout {
 
 extension MMTCalendarView: CalendarButtonDelegate {
     func didTapPreviousMonth() {
-        self.selectedIndexes = []
+        self.selectedIndexes = []//self.selectedIndexes.count == 2 ? [] : [IndexPath(item: 42, section: 0)]
         self.currentDate = self.calendar.date(
             byAdding: .month,
             value: -1,
@@ -74,7 +80,7 @@ extension MMTCalendarView: CalendarButtonDelegate {
     }
     
     func didTapNextMonth() {
-        self.selectedIndexes = []
+        self.selectedIndexes = self.selectedIndexes.count == 2 ? [] : [IndexPath(item: 0, section: 0)]
         self.currentDate = self.calendar.date(
             byAdding: .month,
             value: 1,

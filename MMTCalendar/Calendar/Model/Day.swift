@@ -9,6 +9,7 @@ import Foundation
 struct Day {
     let date: Date
     let number: String
+    let price: String
     let isToday: Bool
     var isSelected: Bool
     var isInSelectionRange: Bool

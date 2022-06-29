@@ -68,9 +68,9 @@ class CalendarHeaderView: UIView {
         return dateFormatter
     }()
     
-    var currentData = Date() {
+    var currentDate = Date() {
         didSet {
-            monthLabel.text = dateFormatter.string(from: currentData)
+            monthLabel.text = dateFormatter.string(from: currentDate)
         }
     }
     
