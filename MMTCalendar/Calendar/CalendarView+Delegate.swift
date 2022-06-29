@@ -29,11 +29,11 @@ extension MMTCalendarView: UICollectionViewDelegateFlowLayout {
         if self.selectedDays.count < 2 {
             // For round trip we can select at most 2 days.
             self.selectedDays.append(day)
+            self.selectedDays = selectedDays.sorted(by: { $0.date < $1.date })
             
             if selectedDays.count == 2 {
-                let sortedDays = selectedDays.sorted(by: { $0.date < $1.date })
-                let startIndex = days.firstIndex(of: sortedDays[0]) ?? 0
-                let endIndex = days.firstIndex(of: sortedDays[1]) ?? (days.count - 1)
+                let startIndex = days.firstIndex(of: selectedDays[0]) ?? 0
+                let endIndex = days.firstIndex(of: selectedDays[1]) ?? (days.count - 1)
                 
                 for index in (startIndex ... endIndex) {
                     let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? CalendarCollectionViewCell
@@ -43,9 +43,8 @@ extension MMTCalendarView: UICollectionViewDelegateFlowLayout {
         } else {
             // When 2 dates selected, and then user selects another one, then reset previous selection.
             if selectedDays.count == 2 {
-                let sortedDays = selectedDays.sorted(by: { $0.date < $1.date })
-                let startIndex = days.firstIndex(of: sortedDays[0]) ?? 0
-                let endIndex = days.firstIndex(of: sortedDays[1]) ?? (days.count - 1)
+                let startIndex = days.firstIndex(of: selectedDays[0]) ?? 0
+                let endIndex = days.firstIndex(of: selectedDays[1]) ?? (days.count - 1)
 
                 for index in (startIndex ... endIndex) {
                     let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? CalendarCollectionViewCell
