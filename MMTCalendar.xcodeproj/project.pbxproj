@@ -10,6 +10,7 @@
 		07B77AE5286B44F300A1A2BA /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B77AE4286B44F300A1A2BA /* CalendarHeaderView.swift */; };
 		07B77AE7286B5F4800A1A2BA /* CalendarView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B77AE6286B5F4800A1A2BA /* CalendarView+Delegate.swift */; };
 		07B77AE9286B60E600A1A2BA /* CalendarViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B77AE8286B60E600A1A2BA /* CalendarViewHelper.swift */; };
+		07B77AEB286C1D1D00A1A2BA /* Price.json in Resources */ = {isa = PBXBuildFile; fileRef = 07B77AEA286C1D1D00A1A2BA /* Price.json */; };
 		07EBB30B286A0029006384DC /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EBB30A286A0029006384DC /* CalendarCollectionViewCell.swift */; };
 		07EBB310286A0339006384DC /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EBB30F286A0339006384DC /* Month.swift */; };
 		07EBB312286A033F006384DC /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EBB311286A033F006384DC /* Day.swift */; };
@@ -46,6 +47,7 @@
 		07B77AE4286B44F300A1A2BA /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
 		07B77AE6286B5F4800A1A2BA /* CalendarView+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarView+Delegate.swift"; sourceTree = "<group>"; };
 		07B77AE8286B60E600A1A2BA /* CalendarViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewHelper.swift; sourceTree = "<group>"; };
+		07B77AEA286C1D1D00A1A2BA /* Price.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Price.json; sourceTree = "<group>"; };
 		07EBB30A286A0029006384DC /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		07EBB30F286A0339006384DC /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		07EBB311286A033F006384DC /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				07EBB30F286A0339006384DC /* Month.swift */,
 				07EBB311286A033F006384DC /* Day.swift */,
+				07B77AEA286C1D1D00A1A2BA /* Price.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07FB75DD2869D9D200E3F842 /* LaunchScreen.storyboard in Resources */,
+				07B77AEB286C1D1D00A1A2BA /* Price.json in Resources */,
 				07FB75DA2869D9D200E3F842 /* Assets.xcassets in Resources */,
 				07FB75D82869D9D100E3F842 /* Main.storyboard in Resources */,
 			);

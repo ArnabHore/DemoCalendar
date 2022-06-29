@@ -67,10 +67,18 @@ extension MMTCalendarView {
             value: dayOffset,
             to: currentDate) ?? currentDate
         
+        let isSelected = selectedDays.contains(date)
+        var isInSelectionRange = false
+        if selectedDays.count == 2 {
+            let sortedDate = selectedDays.sorted()
+            isInSelectionRange = (sortedDate[0] ... sortedDate[1]).contains(date)
+        }
         return Day(
             date: date,
             number: dateFormatter.string(from: date),
-            isSelected: calendar.isDate(date, inSameDayAs: selectedDate),
+            isToday: calendar.isDate(date, inSameDayAs: today),
+            isSelected: isSelected,
+            isInSelectionRange: isInSelectionRange,
             isWithinDisplayedMonth: isWithinDisplayedMonth
         )
     }

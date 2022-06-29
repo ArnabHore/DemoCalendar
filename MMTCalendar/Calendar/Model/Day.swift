@@ -9,6 +9,8 @@ import Foundation
 struct Day {
     let date: Date
     let number: String
-    let isSelected: Bool
+    let isToday: Bool
+    var isSelected: Bool
+    var isInSelectionRange: Bool
     let isWithinDisplayedMonth: Bool
 }

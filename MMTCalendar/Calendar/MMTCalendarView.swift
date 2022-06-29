@@ -35,9 +35,14 @@ class MMTCalendarView: UIView {
         calendar.range(of: .weekOfMonth, in: .month, for: currentDate)?.count ?? 0
     }
     
-    //private let selectedDateChanged: ((Date) -> Void)
     let calendar = Calendar.current
-    let selectedDate: Date
+    let today: Date
+    
+    // To store selected dates, useful when selected dates are not in current months
+    var selectedDays: [Date] = []
+    
+    // To store selected IndexPaths, useful for deselect previously selected date automatically
+    var selectedIndexes: [IndexPath] = []
     
     lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -46,7 +51,7 @@ class MMTCalendarView: UIView {
     }()
     
     override init(frame: CGRect) {
-        self.selectedDate = Date()
+        self.today = Date()
         self.currentDate = Date()
         
         super.init(frame: frame)
@@ -54,7 +59,7 @@ class MMTCalendarView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        self.selectedDate = Date()
+        self.today = Date()
         self.currentDate = Date()
         
         super.init(coder: coder)
@@ -62,8 +67,6 @@ class MMTCalendarView: UIView {
     }
     
     private func setup() {
-        //self.selectedDateChanged = selectedDateChanged
-        
         self.addSubview(collectionView)
         self.addSubview(headerView)
         
