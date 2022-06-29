@@ -16,9 +16,6 @@ extension MMTCalendarView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCollectionViewCell.reuseIdentifier, for: indexPath) as? CalendarCollectionViewCell else { return UICollectionViewCell() }
         let day = days[indexPath.row]
         cell.day = day
-        if day.isSelected {
-            self.selectedIndexes.append(indexPath)
-        }
         return cell
     }
 }
@@ -31,31 +28,36 @@ extension MMTCalendarView: UICollectionViewDelegateFlowLayout {
 
         if self.selectedDays.count < 2 {
             // For round trip we can select at most 2 days.
-            self.selectedDays.append(day.date)
-            self.selectedIndexes.append(indexPath)
+            self.selectedDays.append(day)
             
-            if selectedIndexes.count == 2 {
-                let sortedIndexes = selectedIndexes.sorted()
-                for index in (sortedIndexes[0].row ... sortedIndexes[1].row) {
+            if selectedDays.count == 2 {
+                let sortedDays = selectedDays.sorted(by: { $0.date < $1.date })
+                let startIndex = days.firstIndex(of: sortedDays[0]) ?? 0
+                let endIndex = days.firstIndex(of: sortedDays[1]) ?? (days.count - 1)
+                
+                for index in (startIndex ... endIndex) {
                     let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? CalendarCollectionViewCell
                     cell?.isInSelectionRange = true
                 }
             }
         } else {
             // When 2 dates selected, and then user selects another one, then reset previous selection.
-            if selectedIndexes.count == 2 {
-                let sortedIndexes = selectedIndexes.sorted()
-                for index in (sortedIndexes[0].row ... sortedIndexes[1].row) {
+            if selectedDays.count == 2 {
+                let sortedDays = selectedDays.sorted(by: { $0.date < $1.date })
+                let startIndex = days.firstIndex(of: sortedDays[0]) ?? 0
+                let endIndex = days.firstIndex(of: sortedDays[1]) ?? (days.count - 1)
+
+                for index in (startIndex ... endIndex) {
                     let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? CalendarCollectionViewCell
                     cell?.isSelectedDay = false
                     cell?.isInSelectionRange = false
                 }
-            } else if selectedIndexes.count > 0 {
-                let cell = collectionView.cellForItem(at: selectedIndexes[0]) as? CalendarCollectionViewCell
+            } else if selectedDays.count == 1 {
+                let item = days.firstIndex(of: selectedDays[0]) ?? 0
+                let cell = collectionView.cellForItem(at: IndexPath(item: item, section: 0)) as? CalendarCollectionViewCell
                 cell?.isSelectedDay = false
             }
-            self.selectedDays = [day.date]
-            self.selectedIndexes = [indexPath]
+            self.selectedDays = [day]
         }
         
         let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell
@@ -71,7 +73,6 @@ extension MMTCalendarView: UICollectionViewDelegateFlowLayout {
 
 extension MMTCalendarView: CalendarButtonDelegate {
     func didTapPreviousMonth() {
-        self.selectedIndexes = []//self.selectedIndexes.count == 2 ? [] : [IndexPath(item: 42, section: 0)]
         self.currentDate = self.calendar.date(
             byAdding: .month,
             value: -1,
@@ -80,7 +81,6 @@ extension MMTCalendarView: CalendarButtonDelegate {
     }
     
     func didTapNextMonth() {
-        self.selectedIndexes = self.selectedIndexes.count == 2 ? [] : [IndexPath(item: 0, section: 0)]
         self.currentDate = self.calendar.date(
             byAdding: .month,
             value: 1,

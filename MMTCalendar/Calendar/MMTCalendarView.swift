@@ -39,12 +39,9 @@ class MMTCalendarView: UIView {
     let calendar = Calendar.current
     let today: Date
     
-    // To store selected dates, useful when selected dates are not in current months
-    var selectedDays: [Date] = []
-    
-    // To store selected IndexPaths, useful for deselect previously selected date automatically
-    var selectedIndexes: [IndexPath] = []
-    
+    // To store selected days, useful when selected dates are not in current months
+    var selectedDays: [Day] = []
+        
     var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "d"

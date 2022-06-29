@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Day {
+struct Day: Equatable {
     let date: Date
     let number: String
     let price: String

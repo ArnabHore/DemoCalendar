@@ -96,35 +96,15 @@ class CalendarHeaderView: UIView {
         self.addSubview(separatorView)
         
         // Create day name in the header
-        for dayNumber in 1...7 {
+        let dayNames = Calendar.current.shortWeekdaySymbols
+        for dayName in dayNames {
             let dayLabel = UILabel()
             dayLabel.font = .systemFont(ofSize: 12, weight: .bold)
             dayLabel.textColor = .secondaryLabel
             dayLabel.textAlignment = .center
-            dayLabel.text = dayOfWeekLetter(for: dayNumber)
+            dayLabel.text = dayName
             
             dayOfWeekStackView.addArrangedSubview(dayLabel)
-        }
-    }
-    
-    private func dayOfWeekLetter(for dayNumber: Int) -> String {
-        switch dayNumber {
-        case 1:
-            return "Sun"
-        case 2:
-            return "Mon"
-        case 3:
-            return "Tue"
-        case 4:
-            return "Wed"
-        case 5:
-            return "Thu"
-        case 6:
-            return "Fri"
-        case 7:
-            return "Sat"
-        default:
-            return ""
         }
     }
     
@@ -134,10 +114,10 @@ class CalendarHeaderView: UIView {
         monthLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
         monthLabel.bottomAnchor.constraint(equalTo: self.dayOfWeekStackView.topAnchor).isActive = true
         monthLabel.leadingAnchor.constraint(equalTo: self.previousMonthButton.trailingAnchor, constant: 5).isActive = true
-        monthLabel.trailingAnchor.constraint(equalTo: self.nextMonthButton.leadingAnchor, constant: 5).isActive = true
+        monthLabel.trailingAnchor.constraint(equalTo: self.nextMonthButton.leadingAnchor, constant: -5).isActive = true
         monthLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         
-        previousMonthButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        previousMonthButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
         previousMonthButton.centerYAnchor.constraint(equalTo: self.monthLabel.centerYAnchor).isActive = true
         previousMonthButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
         previousMonthButton.widthAnchor.constraint(equalToConstant: 24).isActive = true

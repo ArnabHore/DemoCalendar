@@ -10,14 +10,14 @@ class CalendarViewHelper {
     let calendar: Calendar
     let priceList: [Price]
     let today: Date
-    let selectedDays: [Date]
+    let selectedDates: [Date]
     let dateFormatter: DateFormatter
     
-    init(calendar: Calendar, priceList: [Price], today: Date, selectedDays: [Date], dateFormatter: DateFormatter) {
+    init(calendar: Calendar, priceList: [Price], today: Date, selectedDays: [Day], dateFormatter: DateFormatter) {
         self.calendar = calendar
         self.priceList = priceList
         self.today = today
-        self.selectedDays = selectedDays
+        self.selectedDates = selectedDays.map({ $0.date })
         self.dateFormatter = dateFormatter
     }
 
@@ -81,10 +81,10 @@ class CalendarViewHelper {
             value: dayOffset,
             to: currentDate) ?? currentDate
         
-        let isSelected = selectedDays.contains(date)
+        let isSelected = selectedDates.contains(date)
         var isInSelectionRange = false
-        if selectedDays.count == 2 {
-            let sortedDate = selectedDays.sorted()
+        if selectedDates.count == 2 {
+            let sortedDate = selectedDates.sorted()
             isInSelectionRange = (sortedDate[0] ... sortedDate[1]).contains(date)
         }
         
